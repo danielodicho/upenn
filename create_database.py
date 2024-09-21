@@ -1,6 +1,7 @@
 # from langchain.document_loaders import DirectoryLoader
-from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import PyPDFLoader
 from langchain.schema import Document
 # from langchain.embeddings import OpenAIEmbeddings
 from langchain_openai import OpenAIEmbeddings
@@ -18,7 +19,7 @@ load_dotenv()
 openai.api_key = os.environ['OPENAI_API_KEY']
 
 CHROMA_PATH = "chroma"
-DATA_PATH = "data/books"
+DATA_PATH = "data"
 
 
 def main():
@@ -32,9 +33,16 @@ def generate_data_store():
 
 
 def load_documents():
-    loader = DirectoryLoader(DATA_PATH, glob="*.md")
-    documents = loader.load()
-    return documents
+    # Load PDF files using PyPDFLoader
+    pdf_loader = DirectoryLoader(DATA_PATH, glob="*.pdf", loader_cls=PyPDFLoader)
+    pdf_documents = pdf_loader.load()
+    
+    # Load text files using TextLoader
+    txt_loader = DirectoryLoader(DATA_PATH, glob="*.txt", loader_cls=TextLoader)
+    txt_documents = txt_loader.load()
+
+    # Combine the loaded documents from both loaders
+    return pdf_documents + txt_documents
 
 
 def split_text(documents: list[Document]):
