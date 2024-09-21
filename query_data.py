@@ -1,6 +1,7 @@
 import argparse
 from dotenv import load_dotenv
 import os
+import requests
 # from dataclasses import dataclass
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
@@ -9,7 +10,7 @@ from langchain.prompts import ChatPromptTemplate
 load_dotenv()
 
 CHROMA_PATH = "chroma"
-
+                                                                                                                                                                                                        
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
 
@@ -41,10 +42,57 @@ def main():
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
-    print(prompt)
+    # print(prompt)
 
-    model = ChatOpenAI()
-    response_text = model.predict(prompt)
+    # model = ChatOpenAI()
+    # response_text = model.predict(prompt)
+    url = "https://proxy.tune.app/chat/completions"
+    payload = {
+        "messages": [
+            {
+                "role": "system",
+                "content": "You are an academic tutor for a programming languages and compilers college course"
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "model": "openai/gpt-4o-mini",
+        "max_tokens": 123,
+        "temperature": 1,
+        "top_p": 1,
+        "n": 1,
+        # "stream": True,
+        # "stop": ["<string>"],
+        "presence_penalty": 1,
+        "frequency_penalty": 1,
+        # "logit_bias": {},
+        # "tools": [
+        #     {
+        #         "type": "<string>",
+        #         "function": {
+        #             "description": "<string>",
+        #             "parameters": {
+        #                 "properties": {},
+        #                 "type": "<string>",
+        #                 "required": ["<string>"]
+        #             },
+        #             "name": "<string>"
+        #         }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        #     }
+        # ],
+        # "echo": True
+    }
+    headers = {
+        "X-Org-Id": "0266c7a8-a772-47c1-a450-b02275131dc7",
+        "Authorization": "Bearer sk-tune-nBUsrB2PKHYgYu98pLUG3sTmIDpSkegHzis",
+        "Content-Type": "application/json"
+    }
+
+    response = requests.request("POST", url, json=payload, headers=headers)
+
+    response_text = response.text
 
     sources = [doc.metadata.get("source", None) for doc, _score in results]
     formatted_response = f"Response: {response_text}\nSources: {sources}"
@@ -53,3 +101,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
