@@ -82,7 +82,7 @@ def main(query_text):
     print(formatted_response)
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 
