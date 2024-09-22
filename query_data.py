@@ -22,12 +22,12 @@ Answer the question based on the above context: {question}
 """
 
 
-def main():
-    # Create CLI.
-    parser = argparse.ArgumentParser()
-    parser.add_argument("query_text", type=str, help="The query text.")
-    args = parser.parse_args()
-    query_text = args.query_text
+def main(query_text):
+    # # Create CLI.
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument("query_text", type=str, help="The query text.")
+    # args = parser.parse_args()
+    # query_text = args.query_text
 
     # Prepare the DB.
     embedding_function = OpenAIEmbeddings()
@@ -59,30 +59,13 @@ def main():
             }
         ],
         "model": "NLNHSR-llama3-1-8b",
-        "max_tokens": 123,
-        "temperature": 1,
-        "top_p": 1,
+        "max_tokens": 300,
+        "temperature": 0.5,
+        "top_p": 0.9,
         "n": 1,
-        # "stream": True,
-        # "stop": ["<string>"],
-        "presence_penalty": 1,
-        "frequency_penalty": 1,
-        # "logit_bias": {},
-        # "tools": [
-        #     {
-        #         "type": "<string>",
-        #         "function": {
-        #             "description": "<string>",
-        #             "parameters": {
-        #                 "properties": {},
-        #                 "type": "<string>",
-        #                 "required": ["<string>"]
-        #             },
-        #             "name": "<string>"
-        #         }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-        #     }
-        # ],
-        # "echo": True
+        "presence_penalty": 0.5,
+        "frequency_penalty": 0.3,
+
     }
     headers = {
         "X-Org-Id": "0266c7a8-a772-47c1-a450-b02275131dc7",

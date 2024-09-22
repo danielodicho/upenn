@@ -29,6 +29,13 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -37,8 +44,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'rest_framework',
+    'rest_framework.authtoken', 
     "content",
-]
+    
+]# course_generator/settings.py
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
