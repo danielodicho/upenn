@@ -16,7 +16,7 @@ load_dotenv()
 #---- Set OpenAI API key 
 # Change environment variable name from "OPENAI_API_KEY" to the name given in 
 # your .env file.
-openai.api_key = os.environ['OPENAI_API_KEY']
+openai.api_key = "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"
 
 CHROMA_PATH = "chroma"
 DATA_PATH = "data"
