@@ -58,7 +58,7 @@ def main():
                 "content": prompt
             }
         ],
-        "model": "openai/gpt-4o-mini",
+        "model": "NLNHSR-llama3-1-8b",
         "max_tokens": 123,
         "temperature": 1,
         "top_p": 1,
