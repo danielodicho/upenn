@@ -1,6 +1,7 @@
 // src/components/Header.js
 import React, { useState } from "react";
-import './Header.css'; // Add custom styles here
+import { Link } from "react-router-dom"; // Import Link for navigation
+import './Header.css'; 
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -9,7 +10,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <h1 className="logo">HiveMind.ai</h1>
+      <Link to="/" className="logo">HiveMind.ai</Link> <Link to="/" className="logo">CS421: Programming Languages & Compilers</Link>{/* Link to the blank Home page */}
       <div className="profile-menu">
         <img 
           src="/path-to-pfp.jpg" 

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 10px 20px;
     color: white;
     background: rgba(0, 0, 0, 0.892); /* Semi-transparent background */
     backdrop-filter: blur(10px); /* Blur effect */
@@ -12,6 +12,19 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
     /* border-radius: 0 0 12px 0; */
   }
+
+  /* src/components/Header.css */
+.link {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
   
   .logo {
     font-size: 1.3rem;
@@ -57,3 +70,14 @@
     background-color: #f0f0f0;
   }
   
+  /* src/components/Header.css */
+.link {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
