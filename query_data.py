@@ -9,7 +9,7 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 load_dotenv()
 
-CHROMA_PATH = "chroma"
+CHROMA_PATH = "chroma-data"
                                                                                                                                                                                                         
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
@@ -22,12 +22,12 @@ Answer the question based on the above context: {question}
 """
 
 
-def main(query_text):
-    # # Create CLI.
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("query_text", type=str, help="The query text.")
-    # args = parser.parse_args()
-    # query_text = args.query_text
+def main():
+    # Create CLI.
+    parser = argparse.ArgumentParser()
+    parser.add_argument("query_text", type=str, help="The query text.")
+    args = parser.parse_args()
+    query_text = args.query_text
 
     # Prepare the DB.
     embedding_function = OpenAIEmbeddings()
@@ -58,14 +58,11 @@ def main(query_text):
                 "content": prompt
             }
         ],
-        "model": "openai/gpt-4o-mini",
+        "model": "NLNHSR/NLNHSR-llama3-1-8b",
         "max_tokens": 300,
         "temperature": 0.5,
         "top_p": 0.9,
         "n": 1,
-        "presence_penalty": 0.5,
-        "frequency_penalty": 0.3,
-
     }
     headers = {
         "X-Org-Id": "0266c7a8-a772-47c1-a450-b02275131dc7",
@@ -84,5 +81,3 @@ def main(query_text):
 
 if __name__ == "__main__":
     main()
-
-

@@ -1,4 +1,4 @@
-# from langchain.document_loaders import DirectoryLoader
+from langchain.document_loaders import DirectoryLoader
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import PyPDFLoader
@@ -18,7 +18,7 @@ load_dotenv()
 # your .env file.
 openai.api_key = "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"
 
-CHROMA_PATH = "chroma"
+CHROMA_PATH = "chroma-data"
 DATA_PATH = "data"
 
 
