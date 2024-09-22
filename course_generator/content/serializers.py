@@ -1,42 +1,59 @@
 # content/serializers.py
 
 from rest_framework import serializers
-from .models import CodingLesson, CodingExercise
+from .models import CodingLesson, CodingExercise, StudentInteraction, CommonQuestion, StruggleAnalysis
 
 class CodingExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = CodingExercise
-        fields = ['id', 'prompt', 'starter_code', 'solution_code', 'hints', 'created_at']
-# content/serializers.py
+        fields = ['id', 'lesson', 'prompt', 'starter_code', 'solution_code', 'hints', 'created_at']
+        read_only_fields = ['id', 'created_at']
 
-from rest_framework import serializers
-from .models import CodingLesson, CodingExercise
 
-class CodingExerciseSerializer(serializers.ModelSerializer):
+class StudentInteractionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CodingExercise
-        fields = ['id', 'prompt', 'starter_code', 'solution_code', 'hints', 'created_at']
+        model = StudentInteraction
+        fields = ['id', 'lesson', 'exercise', 'question', 'response', 'timestamp', 'helpful']
+        read_only_fields = ['id', 'timestamp']
 
-    def validate_prompt(self, value):
-        if not value:
-            raise serializers.ValidationError("Prompt cannot be empty.")
-        return value
+
+class CommonQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CommonQuestion
+        fields = ['id', 'lesson', 'question', 'frequency']
+        read_only_fields = ['id']
+
+
+class StruggleAnalysisSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StruggleAnalysis
+        fields = ['id', 'lesson', 'topic', 'frequency']
+        read_only_fields = ['id']
+
 
 class CodingLessonSerializer(serializers.ModelSerializer):
     exercises = CodingExerciseSerializer(many=True, read_only=True)
+    interactions = StudentInteractionSerializer(many=True, read_only=True)
+    common_questions = CommonQuestionSerializer(many=True, read_only=True, source='common_questions_set')
+    struggle_topics = StruggleAnalysisSerializer(many=True, read_only=True, source='struggle_analyses')
 
     class Meta:
         model = CodingLesson
-        fields = ['id', 'title', 'description', 'chroma_document_id', 'difficulty', 'created_at', 'exercises']
-
-    def validate_title(self, value):
-        if not value:
-            raise serializers.ValidationError("Title cannot be empty.")
-        return value
-
-class CodingLessonSerializer(serializers.ModelSerializer):
-    exercises = CodingExerciseSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = CodingLesson
-        fields = ['id', 'title', 'description', 'chroma_document_id', 'difficulty', 'created_at', 'exercises']
+        fields = [
+            'id',
+            'title',
+            'description',
+            'chroma_document_id',
+            'difficulty',
+            'created_at',
+            'total_interactions',
+            'common_questions',
+            'struggle_topics',
+            'feedback_summary',
+            'lecture_goals',
+            'lecture_topics',
+            'topic_tags',
+            'exercises',
+            'interactions',
+        ]
+        read_only_fields = ['id', 'created_at', 'total_interactions', 'common_questions', 'struggle_topics', 'feedback_summary', 'lecture_goals', 'lecture_topics', 'topic_tags', 'exercises', 'interactions']
