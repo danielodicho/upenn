@@ -225,8 +225,8 @@ def main():
         "n": 1,
     }
     headers = {
-        "X-Org-Id": "0266c7a8-a772-47c1-a450-b02275131dc7",
-        "Authorization": "Bearer sk-tune-nBUsrB2PKHYgYu98pLUG3sTmIDpSkegHzis",
+        "X-Org-Id": "ORGANIZATION_ID",
+        "Authorization": "AUTHORIZATION_ID",
         "Content-Type": "application/json"
     }
 

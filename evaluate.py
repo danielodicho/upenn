@@ -1,4 +1,8 @@
 import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ChatGPT-based evaluation function (replaced with Tune API)
 def evaluate_lesson_tune(lesson):
@@ -34,8 +38,8 @@ def evaluate_lesson_tune(lesson):
         "n": 1,
     }
     headers = {
-        "X-Org-Id": "0266c7a8-a772-47c1-a450-b02275131dc7",
-        "Authorization": "Bearer sk-tune-nBUsrB2PKHYgYu98pLUG3sTmIDpSkegHzis",
+        "X-Org-Id": os.getenv("ORGANIZATION_ID"),
+        "Authorization": os.getenv("AUTHORIZATION_ID"),
         "Content-Type": "application/json"
     }
 
@@ -103,8 +107,8 @@ def merge_best_parts_tune(top_lessons, max_length=500):
         "n": 1,
     }
     headers = {
-        "X-Org-Id": "0266c7a8-a772-47c1-a450-b02275131dc7",
-        "Authorization": "csk-3kk83xy24c3vmkr59mhfkdc9twhn89k3rpydxw3y64jnnh2e",
+        "X-Org-Id": "ORGANIZATION_ID",
+        "Authorization": "AUTHORIZATION_ID",
         "Content-Type": "application/json"
     }
 
