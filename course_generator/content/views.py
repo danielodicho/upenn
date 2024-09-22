@@ -161,11 +161,13 @@ class ListChromaDocuments(View):
     
 # make an endpoint that receives two strings: input and context, calls the query_data.py file, and returns the response
 from rest_framework.decorators import api_view
-from "C:/Users/danie/upenn/query_data.py" import main
-@api_view(['POST'])
+from query_data import main
+
+@action(detail=False, methods=['post'], url_path='generate-response')
 def generate_response(request):
+
     data = request.data
     input = data.get('input')
     context = data.get('context')
-    response = query_data.main(input, context)
+    response = main(input, context)
     return Response({'response': response})
