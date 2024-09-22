@@ -35,6 +35,25 @@
     background-image: linear-gradient(to right, #d5fffe, #f4c6fb);
   }
   
+  .logo2 {
+    font-size: 1.1rem;
+    margin-left: 40px;
+    color: white;
+  }
+  
+  a:link { 
+    text-decoration: none; 
+  } 
+  a:visited { 
+    text-decoration: none; 
+  } 
+  a:hover { 
+    text-decoration: none; 
+  } 
+  a:active { 
+    text-decoration: none; 
+  }
+
   .profile-menu {
     position: relative;
   }

@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <Link to="/" className="logo">HiveMind.ai</Link> <Link to="/" className="logo">CS421: Programming Languages & Compilers</Link>{/* Link to the blank Home page */}
+      <Link to="/" className="logo">HiveMind.ai</Link> <Link to="/" className="logo2">CS421: Programming Languages & Compilers</Link>{/* Link to the blank Home page */}
       <div className="profile-menu">
         <img 
           src="/path-to-pfp.jpg" 
